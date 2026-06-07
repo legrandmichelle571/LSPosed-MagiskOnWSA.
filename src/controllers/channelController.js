@@ -74,7 +74,10 @@ class ChannelController {
       const userId = req.user.id;
 
       if (!youtube_channel_id) {
-        return res.status(400).json({ error: 'youtube_channel_id est requis' });
+        return res.status(403).json({
+          code: 'CHANNEL_NOT_AUTHORIZED',
+          error: 'youtube_channel_id est requis'
+        });
       }
 
       const { data: channels, error } = await getSupabaseAdmin()
